@@ -22,11 +22,14 @@ public class User {
 	private String userPhone;
 	@Column(name="user_Pic")
 	private String userPic;
-	@Column(name="user_Address")
+	@Column(length = 1500, name="user_Address")
 	private String userAddress;
 	
+	@Column(name ="user_type")
+	private String userType;
+	
 	public User(int userId, String userName, String userEmail, String userPassword, String userPhone, String userPic,
-			String userAddress) {
+			String userAddress,String userType) {
 		super();
 		this.userId = userId;
 		this.userName = userName;
@@ -35,7 +38,7 @@ public class User {
 		this.userPhone = userPhone;
 		this.userPic = userPic;
 		this.userAddress = userAddress;
-		
+		this.userType=userType;
 		
 		
 		
@@ -45,7 +48,7 @@ public class User {
 	}
 
 	public User(String userName, String userEmail, String userPassword, String userPhone, String userPic,
-			String userAddress) {
+			String userAddress, String userType) {
 		super();
 		this.userName = userName;
 		this.userEmail = userEmail;
@@ -53,6 +56,7 @@ public class User {
 		this.userPhone = userPhone;
 		this.userPic = userPic;
 		this.userAddress = userAddress;
+		this.userType=userType;
 	}
 
 	@Override
@@ -116,6 +120,14 @@ public class User {
 
 	public void setUserAddress(String userAddress) {
 		this.userAddress = userAddress;
+	}
+
+	public String getUserType() {
+		return userType;
+	}
+
+	public void setUserType(String userType) {
+		this.userType = userType;
 	}
 
 	

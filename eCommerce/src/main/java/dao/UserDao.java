@@ -1,5 +1,9 @@
 package dao;
 
+import java.util.List;
+
+import javax.persistence.Query;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -7,21 +11,49 @@ import org.hibernate.cfg.Configuration;
 import entities.User;
 
 public class UserDao {
-	public static boolean addUser(User usr) {
+	static SessionFactory factory;
+	static {
+		Configuration con = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(User.class);
+		factory = con.buildSessionFactory();
+	}
+	public boolean addUser(User usr) {
 		try {
-			Configuration con = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(User.class);
-			SessionFactory sf = con.buildSessionFactory();
-			Session session = sf.openSession();
+			
+			Session session = factory.openSession();
 			session.beginTransaction();
 
 			session.save(usr);
 
 			session.getTransaction().commit();
-			session.close();
-			sf.close();
+			session.close();			
 			return true;
 		} catch (Exception e) {
 			return false;
 		}
+
 	}
+
+public User getUserByEmailAndPassword(String email, String password) {
+	User user=null;
+	try {
+		
+		Session session =this.factory.openSession();
+		Query q=session.createQuery("from User where userEmail= :e and userPassword= :p");
+		q.setParameter("e", email);
+		q.setParameter("p", password);
+		
+		List l = q.getResultList();
+		
+		session.close();
+		
+		if(l.size()>0) {
+			user =(User)l.get(0);
+		}
+		
+	}catch(Exception e){
+		e.printStackTrace();		
+	}
+	return user;
+}
+	
 }

@@ -1,3 +1,4 @@
+<%@page import="org.stringtemplate.v4.compiler.CodeGenerator.includeExpr_return"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -18,6 +19,8 @@
 	 <h3 class="text-center my-3">Sign up here!</h3>
 
   <div class="card">
+  
+  <%@include file="./component/message.jsp" %>
    <div class="card-body px-5">
    
    <form action="RegisterServlet"method="post">
@@ -46,7 +49,7 @@
   
   <div class="form-group">
     <label for="address" class="form-label">User_Address</label>
-    <textarea name="user_address" style="height:300px; width:300px" class ="form-control" placeholder="Enter your addrees"></textarea>
+    <textarea name="user_address" style="height:95px; width:390px" class ="form-control" placeholder="Enter your addrees"></textarea>
   </div>
  
   <div class="container text-center">

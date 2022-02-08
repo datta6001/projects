@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.transaction.Transaction;
 
 import org.apache.jasper.tagplugins.jstl.core.Out;
@@ -15,19 +16,16 @@ import org.hibernate.Session;
 
 import com.ibm.icu.impl.ICUService.Factory;
 
+import dao.DaoRef;
 import dao.UserDao;
 import entities.User;
 
-/**
- * Servlet implementation class RegisterServlet
- */
 @WebServlet("/RegisterServlet")
 public class RegisterServlet extends HttpServlet {
 	//private static final long serialVersionUID = 1L;
    
     public RegisterServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 
@@ -46,14 +44,20 @@ public class RegisterServlet extends HttpServlet {
 		String userPhone =request.getParameter("user_phone");
 		String userAddress =request.getParameter("user_address");
 		
-		System.out.println(new User(userName,userEmail,userPassword,userPhone,"default jpg",userAddress));
+		
+		
+		HttpSession httpsession= request.getSession();
+		httpsession.setAttribute("message", "Registration Succesfully ! ");
+		response.sendRedirect("register.jsp");
+		
+		
+		
+		
 		
 		//creating user object to store data
-    		UserDao.addUser(new User(userName,userEmail,userPassword,userPhone,"default jpg",userAddress));
+    		DaoRef.userdao.addUser(new User(userName,userEmail,userPassword,userPhone,"default jpg",userAddress,"normal"));
    
-    
-   out.println("successfully saved");
-//   out.println("<br> User id is"+userId);
+      
    
    
 		
