@@ -28,6 +28,10 @@ public class User {
 	@Column(name ="user_type")
 	private String userType;
 	
+	public User() {
+		//default constructor
+	}
+	
 	public User(int userId, String userName, String userEmail, String userPassword, String userPhone, String userPic,
 			String userAddress,String userType) {
 		super();

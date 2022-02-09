@@ -48,6 +48,23 @@ public class LoginServlet extends HttpServlet {
 			  
 		  }else {
 			  out.println("<h1> Welcome "+ user.getUserName() +" </h1>");
+			  
+			  //login
+			  httpsession.setAttribute("current-user", user);
+			 
+			  if(user.getUserType().equals("admin")) {
+				  //admin:admin.jsp
+				  response.sendRedirect("admin.jsp");
+			  }else if(user.getUserType().equals("normal")) {
+				  //normal:normal.jsp
+				  response.sendRedirect("normal.jsp");
+			  }else {
+				  out.println("We have not identified user type");
+			  }
+			  
+			  
+			  
+			  
 		  }
 	}
 

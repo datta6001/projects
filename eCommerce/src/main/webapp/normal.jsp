@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+ 		<h1>This is normal user panel</h1>
 </body>
 </html>

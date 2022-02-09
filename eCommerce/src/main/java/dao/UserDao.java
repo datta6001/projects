@@ -38,12 +38,13 @@ public User getUserByEmailAndPassword(String email, String password) {
 	try {
 		
 		Session session =this.factory.openSession();
+		session.beginTransaction();
 		Query q=session.createQuery("from User where userEmail= :e and userPassword= :p");
 		q.setParameter("e", email);
 		q.setParameter("p", password);
 		
 		List l = q.getResultList();
-		
+		session.getTransaction().commit();
 		session.close();
 		
 		if(l.size()>0) {

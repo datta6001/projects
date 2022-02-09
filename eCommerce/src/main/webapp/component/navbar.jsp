@@ -1,3 +1,17 @@
+<%@page import="entities.User"%>
+<%
+
+	User user1=(User)session.getAttribute("current-user");
+
+
+
+%>
+
+
+
+
+
+
 <nav class="navbar navbar-expand-lg navbar-light custom-bg">
 	<div class ="container">
 	  <div class="container-fluid">
@@ -24,13 +38,47 @@
           
         </li>
         <ul class="navbar-nav ml-auto">
+        
+        <%
+        if(user1==null){
+        	
+        	
+        	
+        	%>
+        		
         <li class="nav-item">
           <a class="nav-link active" href="login.jsp">Login</a>
         </li>
         
         <li class="nav-item">
           <a class="nav-link active" href="register.jsp">Register</a>
+        </li>	
+        	
+        	
+        	
+        	<%    }else{
+        		
+        		
+        		%>
+        		
+        		<li class="nav-item">
+          <a class="nav-link active" href="#!"><%=user1.getUserName() %></a>
         </li>
+        
+        <li class="nav-item">
+          <a class="nav-link active" href="LogoutServlet">Logout</a>
+        </li>	
+        		
+        		
+        		<% 
+        		
+        
+        }
+        
+        %>
+        
+        
+        
         
       </ul>
       
