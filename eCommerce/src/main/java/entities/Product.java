@@ -2,6 +2,8 @@ package entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
@@ -9,12 +11,13 @@ import org.hibernate.annotations.ManyToAny;
 @Entity
 public class Product {
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int pId;
 	private String pName;
 	@Column(length = 3000)
 	private String pDescription;
 	private String pPhoto;
-	private String pPrice;
+	private int pPrice;
 	private int pDiscount;
 	private int pQuantity;
 	
@@ -24,7 +27,7 @@ public class Product {
 	public Product() {
 		super();
 	}
-	public Product(String pName, String pDescription, String pPhoto, String pPrice, int pDiscount, int pQuantity,Category category) {
+	public Product(String pName, String pDescription, String pPhoto, int pPrice, int pDiscount, int pQuantity,Category category) {
 		super();
 		this.pName = pName;
 		this.pDescription = pDescription;
@@ -64,10 +67,10 @@ public class Product {
 	public void setpPhoto(String pPhoto) {
 		this.pPhoto = pPhoto;
 	}
-	public String getpPrice() {
+	public int getpPrice() {
 		return pPrice;
 	}
-	public void setpPrice(String pPrice) {
+	public void setpPrice(int pPrice) {
 		this.pPrice = pPrice;
 	}
 	public int getpDiscount() {

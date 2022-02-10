@@ -5,11 +5,14 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 @Entity
 public class Category {
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int categoryId;
 	private String categoryTitle;
 	private String categoryDescription;
@@ -39,6 +42,9 @@ public class Category {
 		super();
 		this.categoryTitle = categoryTitle;
 		this.categoryDescription = categoryDescription;
+	}
+	public Category() {
+		// TODO Auto-generated constructor stub
 	}
 	public int getCategoryId() {
 		return categoryId;
