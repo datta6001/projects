@@ -1,17 +1,20 @@
 package dao;
 
-import org.hibernate.Session;
-import org.hibernate.query.Query;
+import java.util.List;
 
-import com.mysql.cj.xdevapi.SessionFactory;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
+import org.hibernate.query.Query;
 
 import entities.Category;
 
 public class CatDao {
 	private SessionFactory factory;
 	
-	public CatDao(SessionFactory factory) {
-		this.factory=factory;
+	public CatDao() {
+		Configuration con = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(Category.class);
+		this.factory = con.buildSessionFactory();
 	}
 	
 	// save category to db
@@ -38,5 +41,19 @@ public class CatDao {
 		
 	}
 
-
+	public Category getCategoryById(int cid) {
+		Category cat=null;
+		try {
+			
+			Session session =this.factory.openSession();
+			cat=session .get(Category.class,cid);
+			session.close();
+			
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return cat;
+	}
+	
 }

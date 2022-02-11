@@ -1,6 +1,11 @@
 package servlet;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -8,8 +13,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
+
+import org.hibernate.SessionFactory;
+import org.hibernate.boot.archive.internal.FileInputStreamAccess;
 
 import dao.CatDao;
+import dao.ProductDao;
 import entities.Category;
 import entities.Product;
 
@@ -17,7 +27,6 @@ import entities.Product;
 @WebServlet("/ProductActionServlet")
 public class ProductActionServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private Object FactoryProvider;
        
     public ProductActionServlet() {
         super();
@@ -41,15 +50,15 @@ public class ProductActionServlet extends HttpServlet {
 			
 
 			//fetching category data
-					String title =request.getParameter("catTitle");
-					String decription =request.getParameter("catDescription");
+					String title =request.getParameter("categoryTitle");
+					String decription =request.getParameter("categoryDescription");
 					
 					Category category=new Category();
 					category.setCategoryTitle(title);
 					category.setCategoryDescription(decription);
 					
 			// category database save
-			CatDao catDao=new CatDao(FactoryProvider.getFactory());	
+			CatDao catDao=new CatDao();	
 				int catId=catDao.saveCategory(category);
 				HttpSession httpsession=request.getSession();
 				httpsession.setAttribute("message","Category added successfully:"+catId);
@@ -57,7 +66,7 @@ public class ProductActionServlet extends HttpServlet {
 				return;
 				
 		}else if(op.trim().equals("addproduct")) {
-			//add product
+//add product
 			
 
 			String pName =request.getParameter("pNmae");
@@ -74,9 +83,49 @@ public class ProductActionServlet extends HttpServlet {
 			p.setpName(pName);
 			p.setpDescription(pDescription);
 			p.setpPrice(pPrice);
+			p.setpDiscount(pDiscount);
+			p.setpQuantity(pQuantity);
+			p.setpPhoto(part.getSubmittedFileName());
+			
+//get category by id			
+			CatDao cdao=new CatDao(FactoryProvider.getFactory());
+			Category category=.getCategoryById(catId);
+			p.setCategory(category);
 			
 			
 			
+			
+			
+//product save
+			
+			ProductDao pdao=new ProductDao(FactoryProvider.getFactory());
+			pdao.saveProduct(p);
+			
+//pic upload
+			
+//find  out the path  to upload photo
+			String path = request.getRealPath("img")+File.separator+"products"+File.pathSeparator+part.getSubmittedFileName();
+			System.err.println(path);
+			
+//uploading code..
+			
+			FileOutputStream fos=new FileOutputStream(path);
+			
+			InputStream is=part.getInputStream();
+
+//reading  data..
+			
+			byte []data=new byte[is.available()];
+			
+			
+			
+			
+			
+		//	out.println("Product save sucess...");
+			HttpSession httpsession=request.getSession();
+			httpsession.setAttribute("message","Product is  added successfully..");
+			response.sendRedirect("admin.jsp");
+			return;
 			
 			
 			
