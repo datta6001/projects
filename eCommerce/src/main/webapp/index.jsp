@@ -1,6 +1,11 @@
 
-<%@page import="javax.net.ssl.ManagerFactoryParameters"%>
-<%@page import="com.ibm.icu.text.PluralRules.Factory"%>
+<%@page import="dao.CatDao"%>
+<%@page import="dao.ProductDao"%>
+<%@page import="java.util.List"%>
+<%@page import="entities.Category"%>
+<%@page import="entities.Product"%>
+
+
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -18,11 +23,11 @@
 		
 			<%
 			
-				ProductDao dao=new ProductDao(FactoryProvider.getFactory);
-				List<Product>list=dao.getAllProducts();
+				ProductDao dao= new ProductDao();
+				List<Product> plist=dao.getAllProducts();
 				
-				CategoryDao cdao=new categoryDao(FactoryProvider.getFactory);
-				List<Category>list=cdao.getAllCategories();
+				CatDao cdao=new CatDao();
+				List<Category> clist=cdao.getcategories();
 				
 			
 			
@@ -36,7 +41,7 @@
 				
 				<%
 					
-					for(category c: clist){
+					for(Category c: clist){
 						
 					
 						out.println(c.getCategoryTitle()+"<br>");
@@ -51,12 +56,12 @@
 		<!-- show products -->	
 			<div class="col-md-8">
 			
-				<h1>Number of products is <%=list.size() %></h1>	
+				<h1>Number of products is <%=plist.size() %></h1>	
 				<%
-					for(Product product:list){
+					for(Product product:plist){
 						
-						out.println(product.getPhoto()+"<br>");
-						out.println(product.getName()+"<br><br>");
+						out.println(product.getpPhoto()+"<br>");
+						out.println(product.getpName()+"<br><br>");
 					}
 				
 				

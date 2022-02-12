@@ -39,7 +39,7 @@ public class ProductActionServlet extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
+//		doGet(request, response);
 		
 		// servlet 2
 		// add category
@@ -88,8 +88,8 @@ public class ProductActionServlet extends HttpServlet {
 			p.setpPhoto(part.getSubmittedFileName());
 			
 //get category by id			
-			CatDao cdao=new CatDao(FactoryProvider.getFactory());
-			Category category=.getCategoryById(catId);
+			CatDao cdao=new CatDao();
+			Category category = cdao.getCategoryById(catId);
 			p.setCategory(category);
 			
 			
@@ -98,7 +98,7 @@ public class ProductActionServlet extends HttpServlet {
 			
 //product save
 			
-			ProductDao pdao=new ProductDao(FactoryProvider.getFactory());
+			ProductDao pdao=new ProductDao();
 			pdao.saveProduct(p);
 			
 //pic upload

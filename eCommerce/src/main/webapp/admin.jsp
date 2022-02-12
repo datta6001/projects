@@ -159,29 +159,26 @@ if (user == null) {
 
 					<form action="ProductActionServlet" method="post"
 						enctype="multipart/form-data">
-						<input type="hidden" name="operation" value="addproduct">
 
-						
+						<input type="hidden" name="operation" value="addcategory">
 
-							<input type="hidden" name="operation" value="addcategory">
+						<div class="form-group">
 
-							<div class="form-group">
+							<input type="text" class="form-control" name="catTitle"
+								placeholder="Enter category title" required />
+						</div>
+						<div class="form-group">
+							<textarea style="height: 350px;" class="form-control"
+								placeholder="Enter category decription" name="catDescription"
+								required></textarea>
+						</div>
 
-								<input type="text" class="form-control" name="catTitle"
-									placeholder="Enter category title" required />
-							</div>
-								<div class="form-group">
-									<textarea style="height: 350px;" class="form-control"
-										placeholder="Enter category decription" name="catDescription"
-										required></textarea>
-								</div>
-
-								<div class="container text-center">
-									<button class="btn btn-outline-success">Add Category</button>
-									<button type="button" class="btn btn-secondary"
-										data-bs-dismiss="modal">Close</button>
-								</div>
-						</form>					
+						<div class="container text-center">
+							<button class="btn btn-outline-success">Add Category</button>
+							<button type="button" class="btn btn-secondary"
+								data-bs-dismiss="modal">Close</button>
+						</div>
+					</form>
 				</div>
 
 			</div>
@@ -205,38 +202,40 @@ if (user == null) {
 					</button>
 				</div>
 				<div class="modal-body">
-				
-				
-<!-- form -->				
 
 
-			<!-- product title -->
+					<!-- form -->
+
+					<form action="ProductActionServlet" method="post"
+						enctype="multipart/form-data">
+						<input type="hidden" name="operation" value="addproduct">
+						<!-- product title -->
 						<div class="form-group">
 							<input type="text" class="form-control" name=" pName"
 								placeholder="Enter  title title of product" required />
 						</div>
-			<!-- product description -->
+						<!-- product description -->
 						<div class="form-group">
 							<textarea style="height: 150px;" class="form-control"
 								placeholder="Enter product decription" name="pDescription"
 								required></textarea>
 						</div>
-			<!-- product price -->
+						<!-- product price -->
 						<div class="form-group">
 							<input type="number" class="form-control" name=" pPrice"
 								placeholder="Enter price of product" required />
 						</div>
-			<!-- product discount -->
+						<!-- product discount -->
 						<div class="form-group">
 							<input type="number" class="form-control" name=" pDiscount"
 								placeholder="Enter product discount" required />
 						</div>
-			<!-- product quantity -->
+						<!-- product quantity -->
 						<div class="form-group">
 							<input type="number" class="form-control" name=" pQuantity"
 								placeholder="Enter product quantity" required />
-						</div>	
-			<!-- product category -->
+						</div>
+						<!-- product category -->
 
 						<%
 						CatDao cdao = new CatDao();
@@ -264,34 +263,27 @@ if (user == null) {
 							<label for="pPic">Select Picture Of Product</label> <br> <input
 								type="file" id="pPic" name="pPic" required />
 						</div>
-			
- 			
-			<!-- product file -->
+
+
+						<!-- product file -->
 						<div class="form-group">
 							<label for="pPic">Select Picture Of Product</label> <br> <input
 								type="file" id="pPic" name="pPic" required />
 						</div>
-			<!-- submit button -->
+						<!-- submit button -->
 						<div class="container text-center">
 
 							<button class="btn btn-outline-success">Add Products</button>
-						</div>			
-							
-						
+						</div>
 
 
-
-
-
-
-<!-- end form -->
+						<!-- end form -->
 
 						<div class="modal-footer">
 							<button type="button" class="btn btn-secondary"
-								data-dismiss="modal">Close</button>
+								data-bs-dismiss="modal">Close</button>
 						</div>
-
-					
+						</form>
 				</div>
 
 			</div>
