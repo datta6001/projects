@@ -108,6 +108,8 @@ public class ProductActionServlet extends HttpServlet {
 			System.err.println(path);
 			
 //uploading code..
+			try {
+				
 			
 			FileOutputStream fos=new FileOutputStream(path);
 			
@@ -116,7 +118,15 @@ public class ProductActionServlet extends HttpServlet {
 //reading  data..
 			
 			byte []data=new byte[is.available()];
+			is.read(data);
+
+//writing the data
+			fos.write(data);
 			
+			fos.close();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 			
 			
 			
