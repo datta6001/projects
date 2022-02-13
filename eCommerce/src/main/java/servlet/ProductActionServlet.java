@@ -50,13 +50,13 @@ public class ProductActionServlet extends HttpServlet {
 			
 
 			//fetching category data
-					String title =request.getParameter("categoryTitle");
-					String decription =request.getParameter("categoryDescription");
+					String title =request.getParameter("catTitle");
+					String decription =request.getParameter("catDescription");
 					
 					Category category=new Category();
 					category.setCategoryTitle(title);
 					category.setCategoryDescription(decription);
-					
+					System.out.println(category);
 			// category database save
 			CatDao catDao=new CatDao();	
 				int catId=catDao.saveCategory(category);
@@ -69,8 +69,8 @@ public class ProductActionServlet extends HttpServlet {
 //add product
 			
 
-			String pName =request.getParameter("pNmae");
-			String pDescription =request.getParameter("p");
+			String pName =request.getParameter("pName");
+			String pDescription =request.getParameter("pDescription");
 			int pPrice =Integer.parseInt(request.getParameter("pPrice"));
 			int pDiscount =Integer.parseInt(request.getParameter("pDiscount"));
 			int pQuantity =Integer.parseInt(request.getParameter("pQuantity"));

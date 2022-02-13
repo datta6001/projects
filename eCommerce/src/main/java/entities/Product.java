@@ -91,5 +91,11 @@ public class Product {
 				+ ", pPrice=" + pPrice + ", pDiscount=" + pDiscount + ", pQuantity=" + pQuantity + ", category="
 				+ category + "]";
 	}
+	// Calculate price after discount
+		public int getPriceAterApplyingDisount() {
+			int d=(int)((this.getpDiscount()/100.0)*this.getpPrice());
+			return this.getpPrice()-d;
+			
+		}
 
 }

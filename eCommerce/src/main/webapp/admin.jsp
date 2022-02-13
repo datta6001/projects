@@ -211,7 +211,7 @@ if (user == null) {
 						<input type="hidden" name="operation" value="addproduct">
 						<!-- product title -->
 						<div class="form-group">
-							<input type="text" class="form-control" name=" pName"
+							<input type="text" class="form-control" name="pName"
 								placeholder="Enter  title title of product" required />
 						</div>
 						<!-- product description -->
@@ -222,17 +222,17 @@ if (user == null) {
 						</div>
 						<!-- product price -->
 						<div class="form-group">
-							<input type="number" class="form-control" name=" pPrice"
+							<input type="number" class="form-control" name="pPrice"
 								placeholder="Enter price of product" required />
 						</div>
 						<!-- product discount -->
 						<div class="form-group">
-							<input type="number" class="form-control" name=" pDiscount"
+							<input type="number" class="form-control" name="pDiscount"
 								placeholder="Enter product discount" required />
 						</div>
 						<!-- product quantity -->
 						<div class="form-group">
-							<input type="number" class="form-control" name=" pQuantity"
+							<input type="number" class="form-control" name="pQuantity"
 								placeholder="Enter product quantity" required />
 						</div>
 						<!-- product category -->
@@ -264,8 +264,6 @@ if (user == null) {
 								type="file" id="pPic" name="pPic" required />
 						</div>
 
-
-						</div>
 						<!-- submit button -->
 						<div class="container text-center">
 
