@@ -1,4 +1,5 @@
 
+<%@page import="helper.Helper"%>
 <%@page import="dao.CatDao"%>
 <%@page import="dao.ProductDao"%>
 <%@page import="java.util.List"%>
@@ -37,39 +38,80 @@
 		
 		<!-- show categories -->
 			<div class="col-md-2">
-				<h1><%= clist.size() %></h1>
 				
-				<%
-					
+				<div class="list-group mt-4">
+				<a href="#" class="list-group-item list-group-item-action active">
+  					  All Products
+ 			    </a>
+ 			    
+  			
+ 			    <%
 					for(Category c: clist){
-						
 					
-						out.println(c.getCategoryTitle()+"<br>");
-						
-						
+				%>
+					
+				 <a href="#" class="list-group-item list-group-item-action"><%= c.getCategoryTitle() %></a>
+				
+				<% 		
 					}
 				
-				
 				%>
+				
+				</div>
 			
 			</div>
 		<!-- show products -->	
 			<div class="col-md-8">
-			
-				<h1>Number of products is <%=plist.size() %></h1>	
+		<!-- row -->	
+				<div class="row mt-4">
+		<!-- column-12 -->	
+				
+				<div class="col-md-12">
+				
+				<div class="card-columns">
+		<!-- traversing products -->
 				<%
-					for(Product product:plist){
-						
-						out.println(product.getpPhoto()+"<br>");
-						out.println(product.getpName()+"<br><br>");
-					}
 				
-				
+					for(Product p:list){
 				
 				%>
-			</div>
-		
-		
+					<div class="card">
+					
+					<div class="container text-center">
+					 	
+  						<img class="card-img-top m-2" src="img/products/<%= p.getpPhoto() %>" style="max-height: 270px; max-width:100%; width:auto;" alt="Card image cap">
+					
+					</div>
+					
+					<div class="crad-body">
+							
+							<h5 class="card-title"><%=p.getpName() %></h5>
+							
+								<p class="card-text">
+							
+								<%= Helper.get10Words(p.getpDescription()) %>
+							</p>
+							
+					</div>
+						
+						<div class="card-footer">
+						
+							<button class="btn custom-bg text-white">Add to chart</button>
+							
+							<button class="btn btn-outline-primary">&#8377;<%=p.getpPrice() %></button>
+						
+						
+						</div>
+						
+						
+						
+					</div>
+				<%}
+					%>
+				</div>	
+			</div>	
 		</div>
+	</div>
+</div>
 </body>
 </html>

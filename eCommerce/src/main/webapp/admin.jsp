@@ -265,10 +265,6 @@ if (user == null) {
 						</div>
 
 
-						<!-- product file -->
-						<div class="form-group">
-							<label for="pPic">Select Picture Of Product</label> <br> <input
-								type="file" id="pPic" name="pPic" required />
 						</div>
 						<!-- submit button -->
 						<div class="container text-center">
