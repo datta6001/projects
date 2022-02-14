@@ -16,3 +16,13 @@
 	border: #ffa000!important;
 	
 }
+.discount-label{
+	font-size:10px!important;
+	font-style:italic!important;
+	text-decoration: line-through!important;
+}
+.product-card:hover{
+	background:#e2e2e2;
+	cursor: pointer; 
+	
+}

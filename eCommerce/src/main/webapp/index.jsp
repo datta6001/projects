@@ -14,54 +14,64 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>ADURA'S_SITE..</title>
+	
 <%@include file="./component/js_css.jsp" %>
 </head>
 <script type="./js/Script.js"></script>
 
 <body>
+		<div class="container-fluid">
+	
 <%@include file="/component/navbar.jsp" %>
 		<div class="row mt-3 mx-2">
 		
 			<%
+				String cat=request.getParemeter("category");	
+				//out.println(cat);
 			
 				ProductDao dao= new ProductDao();
-				List<Product> plist=dao.getAllProducts();
+
+				List<Product> list=null;
+				if(cat==null ||cat.trim().equals("all"))
+				{
+					list=dao.getAllProducts();
+				}else
+				{
+					int cid=Integer.parseInt(cat.trim());
+					list=dao.getAllProductsById(cid);
+				}
+				
+				
 				
 				CatDao cdao=new CatDao();
 				List<Category> clist=cdao.getcategories();
-				
-			
-			
-			
 			%>
-		
-		
+
 		<!-- show categories -->
 			<div class="col-md-2">
 				
 				<div class="list-group mt-4">
-				<a href="#" class="list-group-item list-group-item-action active">
+				<a href="index.jsp?category=all" class="list-group-item list-group-item-action active">
   					  All Products
  			    </a>
- 			    
-  			
- 			    <%
+  			    <%
 					for(Category c: clist){
 					
 				%>
 					
-				 <a href="#" class="list-group-item list-group-item-action"><%= c.getCategoryTitle() %></a>
+				 <a href="index.jsp?category=<%=c.getCategoryId() %>" class="list-group-item list-group-item-action"><%= c.getCategoryTitle() %></a>
 				
-				<% 		
-					}
-				
-				%>
-				
+				<%}
+				 if(list.size()==0)
+				 {
+					out.println("<h3>No item in this category</h3>");	 
+				 }
+				%>				
 				</div>
 			
 			</div>
 		<!-- show products -->	
-			<div class="col-md-8">
+			<div class="col-md-10">
 		<!-- row -->	
 				<div class="row mt-4">
 		<!-- column-12 -->	
@@ -75,7 +85,8 @@
 					for(Product p:list){
 				
 				%>
-					<div class="card">
+		<!-- product card -->		
+					<div class="card product-card">
 					
 					<div class="container text-center">
 					 	
@@ -93,25 +104,22 @@
 							</p>
 							
 					</div>
+		<div class="card-footer text-center">
 						
-						<div class="card-footer">
-						
-							<button class="btn custom-bg text-white">Add to chart</button>
+				<button class="btn custom-bg text-white" onclick="add_to_cart(<%=p.getpId()%>,'<%= p.getpName() %>',<%= p.getPriceAterApplyingDisount()%> )">Add to chart</button>
 							
-							<button class="btn btn-outline-primary">&#8377;<%=p.getpPrice() %></button>
+				<button class="btn btn-outline-success">&#8377;<%=p.getPriceAterApplyingDisount() %>/-<span class="test-secondary discount-label"> &#8377;<%=p.getpPrice() %>, <%=p.getpDiscount() %> off</span></button>
 						
-						
-						</div>
-						
-						
+		 </div>
 						
 					</div>
 				<%}
 					%>
-				</div>	
-			</div>	
+						</div>	
+					</div>	
+				</div>
+			</div>
 		</div>
 	</div>
-</div>
 </body>
 </html>
