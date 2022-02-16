@@ -38,11 +38,18 @@
           
         </li>
         <ul class="navbar-nav ml-auto">
+       
+       <!-- cart symbol -->
+        	
+        <li class="nav-item active">
+          <a class="nav-link active" href="#!" data-toggle="modal" data-target="#cart"><i class="fa fa-cart-plus" style="font-size: 20px;"></i> <span class="ml-0 cart-items">(0)</span></a>
+        </li>
+        
+        
+        
         
         <%
-        if(user1==null){
-        	
-        	
+       		 if(user1==null){
         	
         	%>
         		

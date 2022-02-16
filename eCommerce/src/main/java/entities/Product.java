@@ -20,14 +20,21 @@ public class Product {
 	private int pPrice;
 	private int pDiscount;
 	private int pQuantity;
+	private byte[] image;
 	
+	public byte[] getImage() {
+		return image;
+	}
+	public void setImage(byte[] image) {
+		this.image = image;
+	}
 	@ManyToOne
 	private Category category;
 	
 	public Product() {
 		super();
 	}
-	public Product(String pName, String pDescription, String pPhoto, int pPrice, int pDiscount, int pQuantity,Category category) {
+	public Product(String pName, String pDescription, String pPhoto, int pPrice, int pDiscount, int pQuantity,Category category,byte[] image) {
 		super();
 		this.pName = pName;
 		this.pDescription = pDescription;
@@ -36,6 +43,7 @@ public class Product {
 		this.pDiscount = pDiscount;
 		this.pQuantity = pQuantity;
 		this.category=category;
+		this.image = image;
 	}
 	public int getpId() {
 		return pId;

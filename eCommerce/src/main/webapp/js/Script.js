@@ -7,7 +7,7 @@ function add_to_cart(pid,pname,price){
 		let product={productId:pid,productName:pname,productQuantity:1,productPrice:price}
 		products.push(product);
 		localStorage.setItem("cart",JSON.stringify(products));
-		consel.log("Product is added to the first time")
+		console.log("Product is added to the first time")
 	}else
 	{
 		//cart is already present
@@ -39,4 +39,28 @@ function add_to_cart(pid,pname,price){
 
 	}
 	
+	updateCart();	
 }
+
+//uptade cart:
+	function updateCart(){
+		let cartString=localStorage.getItem("cart");	
+		let cart=JSON.parse(cartString);
+		if(cart==null || cart.length==0){
+			console.log("Cart is empty!!")
+			$(".cart-items").html("(0)");
+			$(".cart-body").html("<h3>Cart does not have any items <?h3>");
+			$(" checkout-btn").addClass('disabled');
+		}else
+		{
+			//there is smthing in cart to show
+			console.log(cart)
+			$(".cart-items").html(`(${cart.length})`);
+		}
+	}
+	
+	
+	
+	
+	
+	

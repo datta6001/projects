@@ -1,5 +1,6 @@
 package servlet;
 
+import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -77,7 +78,20 @@ public class ProductActionServlet extends HttpServlet {
 			int catId =Integer.parseInt(request.getParameter("catId"));
 			Part part=request.getPart("pPic");
 			
+//			File f = new File(System.getProperty("user.home")+"\\Pictures\\"+part.getSubmittedFileName());
+//			while(f.exists()) {
+//				f = new File(System.getProperty("user.home")+"\\Pictures\\_"+f.getName());
+//				
+//			}
+//
+//			f.createNewFile();
 			
+//			FileOutputStream fout = new FileOutputStream(f);
+//			BufferedOutputStream bfout = new BufferedOutputStream(fout);
+//			bfout.write(part.getInputStream().readAllBytes());
+//			bfout.close();
+//			fout.close();
+//			System.out.println();
 			
 			Product p=new Product();
 			p.setpName(pName);
@@ -86,6 +100,7 @@ public class ProductActionServlet extends HttpServlet {
 			p.setpDiscount(pDiscount);
 			p.setpQuantity(pQuantity);
 			p.setpPhoto(part.getSubmittedFileName());
+			p.setImage(part.getInputStream().readAllBytes());
 			
 //get category by id			
 			CatDao cdao=new CatDao();
