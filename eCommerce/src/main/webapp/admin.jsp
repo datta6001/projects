@@ -17,6 +17,16 @@ if (user == null) {
 	}
 }
 %>
+	
+						<%
+						CatDao cdao = new CatDao();
+						List<Category> list = cdao.getcategories();
+						%>
+<!-- getting count -->
+
+	Map<String,Long>m=Helper.getCounts(FactoryProvider.getFactory());
+	
+	
 
 
 <!DOCTYPE html>
@@ -54,7 +64,7 @@ if (user == null) {
 						</div>
 
 
-						<h1>101</h1>
+						<h1><%= m.get("userCount") %></h1>
 						<h1 class="text-uppercase text-muted">Users</h1>
 
 					</div>
@@ -72,7 +82,7 @@ if (user == null) {
 								alt="Category_icon" src="img/list.png">
 
 						</div>
-						<h1>123</h1>
+						<h1><%= list.size() %></h1>
 						<h1 class="text-uppercase text-muted">Categories</h1>
 
 					</div>
@@ -90,7 +100,7 @@ if (user == null) {
 								alt="Product_icon" src="img/product.png">
 
 						</div>
-						<h1>1234</h1>
+						<h1><%= m.get("productCount") %></h1>
 						<h1 class="text-uppercase text-muted">Products</h1>
 
 					</div>
@@ -235,12 +245,8 @@ if (user == null) {
 							<input type="number" class="form-control" name="pQuantity"
 								placeholder="Enter product quantity" required />
 						</div>
-						<!-- product category -->
+		<!-- product category -->
 
-						<%
-						CatDao cdao = new CatDao();
-						List<Category> list = cdao.getcategories();
-						%>
 
 
 						<div class="form-group">
@@ -284,7 +290,8 @@ if (user == null) {
 		</div>
 	</div>
 	<!-- end category modal -->
-
-
+			
+			
+	<%@include file="/component/comman_modal.jsp"%>
 </body>
 </html>

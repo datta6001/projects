@@ -77,18 +77,17 @@
 						<div class="card-columns">
 							<!-- traversing products -->
 							<%
-							for (Product p : list) {
-								session.setAttribute("image", p.getImage());
+							for (Product p : list) {								
 							%>
 							<!-- product card -->
 							<div class="card product-card">
 
 								<div class="container text-center">
-
-									<img class="card-img-top m-2" src="image"
+									
+									<img class="card-img-top m-2" src="image?id=<%=p.getpId() %>"
 										style="max-height: 270px; max-width: 100%; width: auto;"
 										alt="Card image cap">
-
+				
 								</div>
 
 								<div class="crad-body">
@@ -126,8 +125,6 @@
 			</div>
 		</div>
 	</div>
-	
-	
 		
 		<%@include file="/component/comman_modal.jsp"%>
 	

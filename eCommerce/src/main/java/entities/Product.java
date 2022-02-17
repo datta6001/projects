@@ -1,5 +1,7 @@
 package entities;
 
+import java.util.Arrays;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -20,6 +22,7 @@ public class Product {
 	private int pPrice;
 	private int pDiscount;
 	private int pQuantity;
+	@Column(columnDefinition = "longblob")
 	private byte[] image;
 	
 	public byte[] getImage() {
@@ -96,8 +99,8 @@ public class Product {
 	@Override
 	public String toString() {
 		return "Product [pId=" + pId + ", pName=" + pName + ", pDescription=" + pDescription + ", pPhoto=" + pPhoto
-				+ ", pPrice=" + pPrice + ", pDiscount=" + pDiscount + ", pQuantity=" + pQuantity + ", category="
-				+ category + "]";
+				+ ", pPrice=" + pPrice + ", pDiscount=" + pDiscount + ", pQuantity=" + pQuantity + ", image="
+				+ Arrays.toString(image) + ", category=" + category + "]";
 	}
 	// Calculate price after discount
 		public int getPriceAterApplyingDisount() {

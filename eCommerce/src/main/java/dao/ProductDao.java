@@ -27,6 +27,7 @@ public class ProductDao {
 			
 			Session session=this.factory.openSession();
 			Transaction tx=session.beginTransaction();
+			
 			session.save(product);
 			
 			tx.commit();
@@ -53,13 +54,20 @@ public class ProductDao {
 	//get all products of given category
 		public List<Product> getAllProductsById(int cid){
 			Session s= this.factory.openSession();
-			Query<Product> query=s.createQuery("from Product as p where p.category.categoryId=:");
+			Query<Product> query=s.createQuery("from Product as p where p.category.categoryId= :id");
 			query.setParameter("id",cid);
 			List<Product> list=query.list();
-			return list;
-			
+			return list;			
 		}
 	
+	public static byte[] getImage(int id) {
+		
+		Session s= new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(Product.class).addAnnotatedClass(Category.class).buildSessionFactory().openSession();
+		Query query=s.createNativeQuery("select image from product where pId="+id);		
+		List list=query.list();
+		if(list.size()>0) return ((byte[])list.get(0));
+		else return null;
+	}
 	
 	
 	

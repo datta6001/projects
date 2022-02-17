@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dao.ProductDao;
+
 /**
  * Servlet implementation class Image
  */
@@ -26,18 +28,13 @@ public class Image extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("image/jpeg");
-//		String image =(String) request.getSession().getAttribute("image");
-//		if(image == null) {
-//			return;
-//		}
 		
-//		File f = new File(System.getProperty("user.home")+"\\Pictures\\"+image);
-//		InputStream in = new FileInputStream();
+		
 		OutputStream out = response.getOutputStream();
-		out.write((byte[])request.getAttribute("image"));
-		request.getSession().removeAttribute("image");
+		out.write(ProductDao.getImage(Integer.parseInt(request.getParameter("id"))));		
 		out.flush();
 		out.close();
+		request.getSession().removeAttribute("image");
 //		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
