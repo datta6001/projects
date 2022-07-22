@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <section style="display: flex;">
+        <div style="width: 50%;">
+            <table border="1" style="border-collapse: collapse;width: 100%;">
+                <thead>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Mobile</th>
+                    <th>E-mail</th>
+                    <th><button onclick="addRow()">+</button></th>
+                </thead>
+                <tbody id="cn">
+
+                </tbody>
+            </table>
+        </div>
+        <div style="max-width: 50%;min-width: 50%;border: 1px solid black;height: 97vh;overflow: auto;">
+            <div>
+                <button onclick="show()">Show JSON</button>
+            </div>
+            <div id="json" style="margin:10px 0 ;">
+
+            </div>
+        </div>
+    </section>
+
+    <script>
+        function addRow() {
+            let id = document.createElement("td");
+            id.innerHTML = "<input type='number'>";
+            let name = document.createElement("td");
+            name.innerHTML = "<input type='text'>";
+            let mb = document.createElement("td");
+            mb.innerHTML = "<input type='number'>";
+            let mail = document.createElement("td");
+            mail.innerHTML = "<input type='email'>";
+            let rm = document.createElement("td");
+            rm.innerHTML = "<button style='background:red' onclick='rm(this)'>-</button>";
+
+            let cn = document.createElement("tr");
+            cn.appendChild(id);
+            cn.appendChild(name);
+            cn.appendChild(mb);
+            cn.appendChild(mail);
+            cn.appendChild(rm);
+            document.getElementById("cn").appendChild(cn);
+        }
+        function rm(ele) {
+            ele.parentElement.parentElement.remove();
+        }
+
+        function show() {
+            let e = document.getElementById("cn").querySelectorAll("tr");
+            let json = [];
+            for (let i = 0; i < e.length; i++) {
+                let inp = e[i].querySelectorAll("input");
+                let j = {};
+                j.id = inp[0].value;
+                j.name = inp[1].value;
+                j.mobile = inp[2].value;
+                j.email = inp[3].value;
+                json.push(j);
+            }
+            document.getElementById("json").innerHTML = "<pre>"+JSON.stringify(json,null, 2) +"</pre>"            
+        }
+    </script>
+</body>
+
+</html>
